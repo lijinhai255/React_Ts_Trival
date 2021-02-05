@@ -9,3 +9,4 @@ git clone https://github.com/lijinhai255/React_Ts_Trival
 npm install or yarn
 npm run start or yarn start
 ```
+## git 提交规范化
