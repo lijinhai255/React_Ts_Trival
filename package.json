@@ -46,12 +46,5 @@
   },
   "devDependencies": {
     "typescript-plugin-css-modules": "^3.0.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo '哈喽，小伙伴们，在这里可以做测试相关的逻辑哦，一般结合公司的 ci'",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "echo 提交代码前需要先进行单元测试 && 可以做测试相关"
-    }
   }
 }
