@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from "./App.module.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { Home,Login,RegisterPage,DetailPage} from "./pages/index"
