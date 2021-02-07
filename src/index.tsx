@@ -7,6 +7,8 @@ import "./i18n/configs"
 // 引入 store  和Provider
 import { Provider } from 'react-redux'
 import store from "./redux/store"
+import axios from "axios"
+axios.defaults.headers["x-icode"] = "FF594A5837DAA91D"
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

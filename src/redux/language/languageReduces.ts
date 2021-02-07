@@ -4,15 +4,14 @@ export interface LanguageState {
     language: "zh" | "en";
     languageList: { name: string, code: string }[]
 }
-const defaultLanguage: LanguageState = {
+const defaultState: LanguageState = {
     language: "zh",
     languageList: [
         { name: "中文", code: "zh" },
         { name: "英文", code: "ch" }
     ]
 }
-export default (state = defaultLanguage, actions:LanguageActionType) => {
-    console.log(actions);
+export default (state = defaultState, actions:LanguageActionType) => {
     switch (actions.type) {
         case CHANGE_LANGUAGE:
             i18n.changeLanguage(actions.payload); // 这样处理是不标准的，有副作用

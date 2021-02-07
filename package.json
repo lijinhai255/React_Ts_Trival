@@ -15,6 +15,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.12.2",
+    "axios": "^0.21.1",
     "husky": "^4.3.8",
     "i18next": "^19.8.7",
     "react": "^17.0.1",
