@@ -1,3 +1,6 @@
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "../store"
+import axios from "axios"
 export const FETCH_RECOMMEND_PRODUCTS_START =
     "FETCH_RECOMMEND_PRODUCTS_START";
 export const FETCH_RECOMMEND_PRODUCTS_SUCCESS =
@@ -44,3 +47,19 @@ export const fetchRecommendProductFailAction = (error): FetchRecommendProductFai
     }
 }
 
+
+export const giveMeDataActionCreator = (): ThunkAction<void,
+    RootState,
+    unknown,
+    RecommendProductAction> => async (dispatch, getState) => {
+        dispatch(fetchRecommendProductStartAction())
+        try {
+            const { data } = await axios.get(
+                "http://123.56.149.216:8080/api/productCollections"
+            );
+            dispatch(fetchRecommendProductSuccessAction(data))
+        } catch (error) {
+            //   this.props.fetchFail(error.message)
+            dispatch(fetchRecommendProductFailAction(error))
+        }
+    }
