@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps, useParams } from "react-router-dom";
 import axios from "axios";
-import { Spin, Row, Col, DatePicker, Divider, Typography,Anchor,Menu } from "antd";
+import { Spin, Row, Col, DatePicker, Divider, Typography, Anchor, Menu } from "antd";
 import styles from "./style.module.scss"
 // 引入 header 组件 
-import { Header, Footer, ProductIntro,ProductComments } from "../../components/"
+import { Header, Footer, ProductIntro, ProductComments } from "../../components/"
 // 引入产品组件 类型
 import { PropsType } from "../../components/productIntro"
 import { commentMockData } from "./mockup";
+// 引入 redux
+import { ProductDetailSlice, getProductDetail } from "../../redux/productDetail/slice"
+import { useSelector } from "../../redux/hooks"
+import { useDispatch } from "react-redux"
 interface MatchParams {
   touristRouteId: string;
 }
@@ -17,21 +21,17 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
   props
 ) => {
   const { touristRouteId } = useParams<MatchParams>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [product, setProduct] = useState<any>()
-  const [error, serError] = useState<string | null>(null)
+  // const [loading, setLoading] = useState<boolean>(false)
+  // const [product, setProduct] = useState<any>()
+  // const [error, serError] = useState<string | null>(null)
+  const loading = useSelector(state => state.productsDetail.loading)
+  const error = useSelector(state => state.productsDetail.error)
+  const product = useSelector(state => state.productsDetail.data)
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true)
-        const { data } = await axios.get(`http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`)
-        // console.log(data, "data")
-        setProduct(data)
-        setLoading(false)
-      } catch (error) {
-        serError(error.message)
-        setLoading(false)
-      }
+      dispatch(getProductDetail(touristRouteId))
     }
     fetchData()
   }, [])
@@ -56,12 +56,12 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
   return (
     <>
       <Header></Header>
-      {product &&<div className={styles['page-content']}>
+      {product && <div className={styles['page-content']}>
         {/* 产品介绍 与 日期组件 */}
         <div className={styles['product-intro-container']}>
           <Row>
             <Col span={13}>
-              { <ProductIntro
+              {<ProductIntro
                 title={product.title}
                 shortDescription={product.description}
                 price={product.originalPrice}
@@ -81,22 +81,22 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
         </div>
         {/* 锚点菜单 */}
         <div className={styles["product-detail-anchor"]}>
-        <Anchor className={styles["product-detail-anchor"]}>
-          <Menu mode="horizontal">
-            <Menu.Item key="1">
-              <Anchor.Link href="#feature" title="产品特色"></Anchor.Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Anchor.Link href="#fees" title="费用"></Anchor.Link>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Anchor.Link href="#notes" title="预订须知"></Anchor.Link>
-            </Menu.Item>
-            <Menu.Item key="5">
-              <Anchor.Link href="#comments" title="用户评价"></Anchor.Link>
-            </Menu.Item>
-          </Menu>
-        </Anchor>
+          <Anchor className={styles["product-detail-anchor"]}>
+            <Menu mode="horizontal">
+              <Menu.Item key="1">
+                <Anchor.Link href="#feature" title="产品特色"></Anchor.Link>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <Anchor.Link href="#fees" title="费用"></Anchor.Link>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Anchor.Link href="#notes" title="预订须知"></Anchor.Link>
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Anchor.Link href="#comments" title="用户评价"></Anchor.Link>
+              </Menu.Item>
+            </Menu>
+          </Anchor>
         </div>
         {/* 产品特色 */}
         <div id="feature" className={styles["product-detail-container"]}>
@@ -134,8 +134,8 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
             <Typography.Title level={3}>用户评价</Typography.Title>
           </Divider>
           <div style={{ margin: 40 }}>
-            <ProductComments 
-            data={commentMockData}
+            <ProductComments
+              data={commentMockData}
             />
           </div>
         </div>
