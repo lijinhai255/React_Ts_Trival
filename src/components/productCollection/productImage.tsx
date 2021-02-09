@@ -20,7 +20,7 @@ const ProductImageComponent: React.FC<PropsType> = ({
   history,
   location,
   match }) => {
-  console.log(history);
+  // console.log(history);
   return (
     <Link to={`/detail/${id}`}>
       {size == "large" ? (

@@ -82,7 +82,7 @@ class HomePageComponent extends Component<PropsType> {
               <Carousel />
             </Col>
           </Row>
-          {/* <ProductCollection
+          <ProductCollection
             title={
               <Typography.Title level={3} type="warning">
                 {t("home_page.hot_recommended")}
@@ -109,7 +109,7 @@ class HomePageComponent extends Component<PropsType> {
             sideImage={sideImage3}
             products={productList[2].touristRoutes}
           />
-          <BusinessPartners /> */}
+          <BusinessPartners />
         </div>
         <Footer />
       </>
