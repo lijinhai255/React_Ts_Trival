@@ -6,11 +6,13 @@ import thunk from "redux-thunk"
 import {actionLog} from "./middleware/actionLog"
 //引入产品 详情 slice
 import {ProductDetailSlice} from "./productDetail/slice"
+import {productSearchSlice} from "./productSearch/slice"
 import {combineReducers,configureStore} from "@reduxjs/toolkit"
 const rootReducer = combineReducers({ 
     language:languageReducer,
     recommendProducts:recommendProductsReducer,
-    productsDetail:ProductDetailSlice.reducer
+    productsDetail:ProductDetailSlice.reducer,
+    productSearch:productSearchSlice.reducer
 })
 // const store = createStore(rootReducer,applyMiddleware(thunk,actionLog))
 const store = configureStore({
