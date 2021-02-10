@@ -6,6 +6,8 @@ import { Spin } from "antd";
 import { searchProduct } from "../../redux/productSearch/slice";
 import { useSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
+import { MainLayout } from "../../layout/mainLayout";
+
 interface MatchParams {
     keyWords: string;
 }
@@ -21,7 +23,7 @@ export const SearchPage: React.FC<RouteComponentProps<MatchParams>> = () => {
     const location = useLocation();
     useEffect(() => {
         dispatch(searchProduct({ nextPage: 1, pageSize: 10, keyWords }))
-    },[location])
+    }, [location])
     const onChangeFn = (nextPage, pageSize) => {
         console.log(121212)
         dispatch(searchProduct({ nextPage, pageSize, keyWords }))
@@ -46,23 +48,23 @@ export const SearchPage: React.FC<RouteComponentProps<MatchParams>> = () => {
 
     return (
         <div>
-            <Header></Header>
-            {/* 分类过滤器 */}
-            <div className={styles["page-content"]}>
-                <FilterArea
-                ></FilterArea>
-            </div>
-            {/* 产品列表 */}
-            <div className={styles["product-list-container"]}>
+            <MainLayout>
+                {/* 分类过滤器 */}
+                <div className={styles["page-content"]}>
+                    <FilterArea
+                    ></FilterArea>
+                </div>
+                {/* 产品列表 */}
+                <div className={styles["product-list-container"]}>
                 <ProductList
                     data={productList}
                     paging={pagination}
                     onPageChange={onChangeFn}
                 >
-
                 </ProductList>
             </div>
-            <Footer></Footer>
-        </div>
+       
+            </MainLayout>
+       </div>
     )
 }

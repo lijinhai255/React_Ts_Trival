@@ -16,6 +16,7 @@ import { RootState } from "../../redux/store";
 import {
   giveMeDataActionCreator
 } from "../../redux/recommendProducts/recommendProductsActions"
+import { MainLayout } from "../../layout/mainLayout";
 const mapStateToProps = (state: RootState) => {
   console.log(state,"state-state")
   return {
@@ -71,9 +72,9 @@ class HomePageComponent extends Component<PropsType> {
     }
     return (
       <>
-        <Header />
-        {/* 页面内容 content */}
-        <div className={styles["page-content"]}>
+        <MainLayout>
+ {/* 页面内容 content */}
+ <div className={styles["page-content"]}>
           <Row style={{ marginTop: 20 }}>
             <Col span={6}>
               <SideMenu />
@@ -111,7 +112,9 @@ class HomePageComponent extends Component<PropsType> {
           />
           <BusinessPartners />
         </div>
-        <Footer />
+        
+        </MainLayout>
+       
       </>
     )
   }

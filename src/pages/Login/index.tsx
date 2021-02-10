@@ -1,6 +1,11 @@
 import React from "react";
-
-export const Login : React.FC = (props) => {
+import { UserLayout } from "../../layout/userLayout/index"
+import {SignInForm} from "./From"
+export const Login: React.FC = (props) => {
     console.log(props)
-    return <h1>登录页面</h1>;
+    return (
+        <UserLayout>
+           <SignInForm></SignInForm>
+        </UserLayout>
+    );
 }

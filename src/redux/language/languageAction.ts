@@ -17,7 +17,8 @@ export const changeLanguageActionCreator = (language: "zh" | "ch"): ChangeLangua
     }
 }
 
-export const addLanguageActionCreator = (name: string, code: string): AddLanguageAction => {
+export const addLanguageActionCreator = (name: string, code: string): 
+AddLanguageAction => {
     return {
         type: ADD_LANGUAGE,
         payload: { name, code }
