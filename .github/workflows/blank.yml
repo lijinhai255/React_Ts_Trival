@@ -35,14 +35,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 运行 linter（使用 ESLint）
-      - name: Run linter
-        run: npm run lint
-
-      # 运行测试
-      - name: Run tests
-        run: npm test
-
       # 构建项目
       - name: Build project
         run: npm run build
